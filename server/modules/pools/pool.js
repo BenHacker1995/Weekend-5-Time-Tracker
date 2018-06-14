@@ -8,4 +8,4 @@ const config = {
     idleTimeoutMillis: 1000
 };
 
-module.exports = new pg.Pool(config);
+module.exports = new pg.Pool( config );
