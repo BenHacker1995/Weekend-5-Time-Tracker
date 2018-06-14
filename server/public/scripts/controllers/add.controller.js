@@ -6,6 +6,10 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         console.log( 'In addEntry of controller' );
         self.newEntry = {
             entry: self.entry,
+            projectname: self.projectname,
+            dateof: self.dateof,
+            starttime: self.starttime,
+            endtime: self.endtime,
             hours: self.hours
         }
         TimeService.newEntry = self.newEntry;

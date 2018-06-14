@@ -1,11 +1,28 @@
 <h3>Add Entry</h3>
 <form ng-submit="AC.addEntry()">
     <input type="text" placeholder="Share what you did here!" ng-model="AC.entry">
-    <input type="text" placeholder="Time Spent" ng-model="AC.hours">
-    <input type="submit" value="Submit">
+    <div>
+        <input type="text" placeholder="Project" ng-model="AC.projectname">
+        <input type="text" placeholder="yyyy/mm/dd" ng-model="AC.dateof">
+        <input type="text" placeholder="Start Time" ng-model="AC.starttime">
+        <input type="text" placeholder="End Time" ng-model="AC.endtime">
+        <input type="submit" value="Submit">
+    </div>
 </form>
-<ul>
-    <li ng-repeat="entry in AC.entries">
-        {{ entry.entry }}
-    </li>
+<table class="table">
+    <thead>
+        <th>Entry</th>
+        <th>Project</th>
+        <th>Date</th>
+        <th>Hours</th>
+        <th>Actions</th>
+    </thead>
+    <tr ng-repeat="entry in AC.entries">
+        <td>{{ entry.entry }}</td>
+        <td>{{ entry.projectname }}</td>
+        <td>{{ entry.dateof.substring( 0, 10 ) }}</td>
+        <td>{{ entry.hours }}</td>
+        <td><input type="button" value="Delete"></td>
+    </tr>
+</table>
 </ul>
