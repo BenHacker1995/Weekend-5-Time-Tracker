@@ -12,17 +12,28 @@
     <script src="vendors/angular-messages.js"></script>
     <script src="vendors/angular-material.js"></script>
     <script src="vendors/angular-aria.js"></script>
+    <script src="vendors/angular-animate.js"></script>
+    <script src="scripts/client.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="vendors/angular-material.css">
     <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Controllers -->
+    <script src="scripts/controllers/add.controller.js"></script>
+    <script src="scripts/controllers/manage.controller.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/time-tracker.service.js"></script>
+
 </head>
 <!-- Common HTML -->
 <body ng-app="timeApp">
     <h1>Time Tracker</h1>
     <div class="nav">
-        <a ng-href="#!/add">Add Entry</a>
-        <a ng-href="#!/manage">Manage Projects</a>
+        <a href="#!/add">Add Entry</a>
+        <a href="#!/manage">Manage Projects</a>
     </div>
+    <ng-view></ng-view>
 </body>
 </html>
