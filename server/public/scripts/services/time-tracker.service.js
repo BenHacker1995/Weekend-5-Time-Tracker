@@ -10,12 +10,10 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
             url: '/add'
         }).then( function( response ){
             console.log('Handled getEntry for /add: ', response );
-            self.entryArray.list = response.data;
-            // Bind response to PowerController
-            
+            self.entryArray.list = response.data;            
         }).catch( function( error ){
             console.log( 'Error handling getEntry for /add: ', error );
         });
-    } // end getPowers
+    } // end getEntry
     self.getEntry();
 }])
