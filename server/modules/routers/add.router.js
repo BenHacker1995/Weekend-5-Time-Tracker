@@ -19,6 +19,8 @@ router.get( '/', ( req, res ) => {
 router.post( '/', ( req, res ) => {
     console.log( 'In POST request for entry' );
     let newEntry = req.body;
+    console.log( newEntry );
+    
     let now  = req.body.endtime;
     let then = req.body.starttime;
 
@@ -27,8 +29,8 @@ router.post( '/', ( req, res ) => {
 
     // let hours = req.body.endtime - req.body.starttime;
 
-    const queryText = `INSERT INTO entry ( entry, projectname, dateof, starttime, endtime, hours ) VALUES ( $1, $2, $3, $4, $5, $6 )`;
-    pool.query( queryText, [ newEntry.entry, newEntry.projectname, newEntry.dateof, newEntry.starttime, newEntry.endtime, hours ] )
+    const queryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours ) VALUES ( $1, $2, $3, $4, $5, $6 )`;
+    pool.query( queryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, newEntry.starttime, newEntry.endtime, hours ] )
     .then( ( result ) => {
         console.log( `Successfully posted to database with ${ result }` );
         res.sendStatus( 201 );

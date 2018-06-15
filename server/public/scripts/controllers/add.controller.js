@@ -5,17 +5,17 @@ timeApp.controller( 'AddController', function ( TimeService ) {
     self.addEntry = function() {
         console.log( 'In addEntry of controller' );
         self.newEntry = {
-            entry: self.entry,
+            entrytext: self.entrytext,
             projectname: self.projectname,
             dateof: self.dateof,
             starttime: self.starttime,
             endtime: self.endtime,
-            hours: self.hours
+            entryhours: self.entryhours
         }
         TimeService.newEntry = self.newEntry;
         TimeService.addEntry().then( function( response ) {
             self.getEntry();
-            self.updateHours();
+            // self.updateHours();
         })
     }
 
