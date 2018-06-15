@@ -1,0 +1,20 @@
+<h3>Manage Projects</h3>
+<form ng-submit="MC.addProject()">
+    <input type="text" placeholder="Share what you did here!" ng-model="AC.entry">
+    <div>
+        <input type="text" placeholder="Add Project" ng-model="MC.name">
+        <input type="submit" value="Submit">
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <th>Project</th>
+        <th>Total Hours</th>
+        <th>Actions</th>
+    </thead>
+    <tr ng-repeat="project in MC.projects">
+        <td>{{ project.name }}</td>
+        <td>{{ project.hours }}</td>
+        <td><input type="button" value="Delete"></td>
+    </tr>
+</table>

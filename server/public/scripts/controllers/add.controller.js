@@ -15,6 +15,7 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         TimeService.newEntry = self.newEntry;
         TimeService.addEntry().then( function( response ) {
             self.getEntry();
+            self.updateHours();
         })
     }
 
@@ -24,5 +25,10 @@ timeApp.controller( 'AddController', function ( TimeService ) {
             self.entries = TimeService.entryArray.list; 
         });
     } // end getPowers
+
+    self.updateHours = function() {
+        console.log( 'In updateHours of controller' );
+        TimeService.updateHours();
+    }
     self.getEntry();
 })

@@ -19,8 +19,8 @@ router.get( '/', ( req, res ) => {
 router.post( '/', ( req, res ) => {
     console.log( 'In POST request for entry' );
     let newEntry = req.body;
-    var now  = req.body.endtime;
-    var then = req.body.starttime;
+    let now  = req.body.endtime;
+    let then = req.body.starttime;
 
     let hours = moment.utc( moment( now,"HH:mm" ).diff( moment( then,"HH:mm" ) ) ).format( "HH:mm" );
     hours = moment.duration( hours ).asHours();
@@ -34,6 +34,24 @@ router.post( '/', ( req, res ) => {
         res.sendStatus( 201 );
     }).catch( ( error ) => {
         console.log( `Error posting to power: ${ error }` );
+        res.sendStatus( 500 );
+    })
+})
+
+router.put( '/', ( req, res ) => {
+    console.log( 'In PUT request for project' );
+    const id = req.params.id;
+    let hours = 0;
+    for( i of req.body.hours ) {
+        hours += i;
+    }
+    const queryText = `UPDATE project SET hours = ${ hours } WHERE id=${ id }`;
+    pool.query( queryText )
+    .then( ( result ) => {
+        console.log( `Successful update of hours`);
+        res.sendStatus( 200 );
+    }).catch( ( error ) => {
+        console.log( `Error updating hours in project: ${ error }` );
         res.sendStatus( 500 );
     })
 })
