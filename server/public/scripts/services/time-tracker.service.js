@@ -44,16 +44,4 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
         });
     } // end getEntry
 
-    // self.updateHours = function() {
-    //     return $http({
-    //         method: 'PUT',
-    //         url: `/manage/${id}`,
-    //         data: req.body
-    //     }).then( function( response ) {
-    //         console.log( `Handled updateHours for /manage: ${ response }` );
-    //     }).catch( function( error ) {
-    //         console.log( `Error handling updateHours for /manage: ${ error }`);
-            
-    //     })
-    // }
 }])
