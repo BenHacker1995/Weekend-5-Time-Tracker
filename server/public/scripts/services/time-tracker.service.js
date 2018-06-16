@@ -4,7 +4,6 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
 
     self.entryArray = { list: [] };
     self.projectArray = { list: [] };
-    self.projectName = [];
 
 
     self.addEntry = function( object ){
@@ -19,6 +18,19 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
             console.log( `Error handling POST for /add: ${ error }` );
         });
     } // end addEntry
+
+    self.addProject = function( object ){
+        return $http({
+            method: 'POST',
+            url: '/manage',
+            data: self.newProject
+        }).then(function( response ){
+            console.log( 'Posted POST for /manage' );
+            self.getProject();
+        }).catch(function( error ){
+            console.log( `Error handling POST for /manage: ${ error }` );
+        });
+    } // end addProject
 
     self.getEntry = function(){
         return $http({

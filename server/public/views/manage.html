@@ -1,9 +1,8 @@
 <h3>Manage Projects</h3>
 <form ng-submit="MC.addProject()">
-    <input type="text" placeholder="Share what you did here!" ng-model="AC.entry">
     <div>
         <input type="text" placeholder="Add Project" ng-model="MC.name">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" ng-click="MC.addProject">
     </div>
 </form>
 <table class="table">
@@ -14,7 +13,7 @@
     </thead>
     <tr ng-repeat="project in MC.projects">
         <td>{{ project.name }}</td>
-        <td>{{ project.sum }}</td>
+        <td>{{ project.sum || '0' }}</td>
         <td><input type="button" value="Delete"></td>
     </tr>
 </table>
