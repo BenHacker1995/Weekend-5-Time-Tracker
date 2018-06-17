@@ -15,7 +15,7 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         }
         TimeService.newEntry = self.newEntry;
         TimeService.addEntry().then( function( response ) {
-            self.getEntry();
+            self.updateId();
         })
     }
 
@@ -25,6 +25,13 @@ timeApp.controller( 'AddController', function ( TimeService ) {
             self.entries = TimeService.entryArray.list; 
         });
     } // end getEntry
+
+    self.updateId = function() {
+        console.log( 'In updateId of controller' );
+        TimeService.updateId().then( function( response ) {
+            self.getEntry();
+        })
+    }
 
     self.getEntry();
 })

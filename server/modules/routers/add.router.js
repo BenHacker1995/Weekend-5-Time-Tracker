@@ -31,7 +31,7 @@ router.post( '/', ( req, res ) => {
     let hours = moment.utc( moment( now,"HH:mm" ).diff( moment( then,"HH:mm" ) ) ).format( "HH:mm" );
     hours = moment.duration( hours ).asHours();
     
-    const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours, project_id ) VALUES ( $1, $2, $3, $4, $5, $6, $7 );`;
+    const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours ) VALUES ( $1, $2, $3, $4, $5, $6 );`;
     // UPDATE entry SET project_id = project.id FROM project WHERE entry.projectname = project.name;`;
     pool.query( queryEntryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, newEntry.starttime, newEntry.endtime, hours ] )
     // pool.query( queryIdText )
@@ -39,7 +39,20 @@ router.post( '/', ( req, res ) => {
         console.log( `Successfully posted to database with ${ result }` );
         res.sendStatus( 201 );
     }).catch( ( error ) => {
-        console.log( `Error posting to power: ${ error }` );
+        console.log( `Error posting: ${ error }` );
+        res.sendStatus( 500 );
+    })
+})
+
+router.put( '/', ( req, res ) => {
+    console.log( 'In PUT request for entry' );
+    const queryText = `UPDATE entry SET project_id = project.id FROM project WHERE entry.projectname = project.name;`;
+    pool.query( queryText )
+    .then( ( result ) => {
+        console.log( `Successfully updated id` );
+        res.sendStatus( 200 );
+    }).catch( ( error ) => {
+        console.log( `Error updating database: ${ error }` );
         res.sendStatus( 500 );
     })
 })

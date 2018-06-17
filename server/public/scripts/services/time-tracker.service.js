@@ -52,8 +52,18 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
             console.log( 'Handled getProject for /manage: ', response );
             self.projectArray.list = response.data;            
         }).catch( function( error ){
-            console.log( 'Error handling getProject for /add: ', error );
+            console.log( 'Error handling getProject for /manage: ', error );
         });
     } // end getEntry
 
+    self.updateId = function() {
+        return $http({
+            method: 'PUT',
+            url: '/add'
+        }).then( function( response ) {
+            console.log( `Handled updateId for /add: ${ response }` );
+        }).catch( function( error ) {
+            console.log( `Error handling updateId for /add: ${ error }` );
+        });
+    }
 }])
