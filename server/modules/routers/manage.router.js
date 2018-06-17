@@ -21,13 +21,27 @@ router.get( '/', ( req, res ) => {
 router.post( '/', ( req, res ) => {
     console.log( 'In POST request for project' );
     let newProject = req.body;    
-    const queryText = `INSERT INTO project ( name) VALUES ( $1 )`;
+    const queryText = `INSERT INTO project ( name ) VALUES ( $1 )`;
     pool.query( queryText, [ newProject.name ] )
     .then( ( result ) => {
         console.log( `Successfully posted to database with ${ result }` );
         res.sendStatus( 201 );
     }).catch( ( error ) => {
-        console.log( `Error posting to power: ${ error }` );
+        console.log( `Error posting to project: ${ error }` );
+        res.sendStatus( 500 );
+    })
+})
+
+router.delete( '/:id', ( req, res ) => {
+    console.log( 'In DELETE request for manage' );
+    const queryText = `DELETE FROM project WHERE id = $1;`;
+    
+    pool.query( queryText, [ req.params.id ] )
+    .then( ( result ) => {
+        console.log( `Successfully deleted project` );
+        res.sendStatus( 200 );
+    }).catch( ( error ) => {
+        console.log( `Error deleting from database: ${ error }` );
         res.sendStatus( 500 );
     })
 })

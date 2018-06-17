@@ -4,7 +4,6 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
 
     self.entryArray = { list: [] };
     self.projectArray = { list: [] };
-    self.id;
 
 
     self.addEntry = function( object ){
@@ -62,10 +61,20 @@ timeApp.service( 'TimeService', [ '$http', function( $http ) {
             method: 'DELETE',
             url: `/add/${deleteId}`
         }).then( function( response ) {
-            // self.id = response.data.id;
-            console.log( `Handled deleteEntry for /add: ${ response.params }` );
+            console.log( `Handled deleteEntry for /add: ${ response }` );
         }).catch( function( error ) {
             console.log( `Error handling deleteEntry for /add: ${ error }` );
+        })
+    }
+
+    self.deleteProject = function( deleteId ) {
+        return $http({
+            method: 'DELETE',
+            url: `/manage/${deleteId}`
+        }).then( function( response ) {
+            console.log( `Handled deleteEntry for /manage: ${ response }` );
+        }).catch( function( error ) {
+            console.log( `Error handling deleteEntry for /manage: ${ error }` );
         })
     }
 

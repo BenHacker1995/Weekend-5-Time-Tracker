@@ -29,7 +29,6 @@ timeApp.controller( 'AddController', function ( TimeService ) {
     self.deleteEntry = function( deleteId ) {
         console.log( 'In deleteEntry of controller' );
         TimeService.deleteEntry( deleteId ).then( function( response ) {
-            // TimeService.deleteId = self.id;
             self.getEntry();
         })
     }

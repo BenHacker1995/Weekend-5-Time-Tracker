@@ -14,6 +14,6 @@
     <tr ng-repeat="project in MC.projects">
         <td>{{ project.name }}</td>
         <td>{{ project.sum || '0' }}</td>
-        <td><input type="button" value="Delete"></td>
+        <td><input type="button" value="Delete" ng-click="MC.deleteProject( project.id )"></td>
     </tr>
 </table>

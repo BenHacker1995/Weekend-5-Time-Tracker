@@ -3,12 +3,19 @@ timeApp.controller( 'ManageController', [ 'TimeService', function ( TimeService 
     const self = this;
 
     self.addProject = function() {
-        console.log( 'In addEntry of controller' );
+        console.log( 'In addProject of controller' );
         self.newProject = {
         name: self.name
         }
         TimeService.newProject = self.newProject;
         TimeService.addProject().then( function( response ) {
+            self.getProject();
+        })
+    }
+
+    self.deleteProject = function( deleteId ) {
+        console.log( 'In deleteProject of controller' );
+        TimeService.deleteProject( deleteId ).then( function( response ) {
             self.getProject();
         })
     }
