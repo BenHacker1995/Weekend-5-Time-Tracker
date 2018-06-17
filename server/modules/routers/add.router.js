@@ -5,7 +5,12 @@ const moment = require( 'moment' );
 
 router.get( '/', ( req, res ) => {
     console.log( 'In GET request for entry' );
-    const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname FROM entry;`;
+    // const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname FROM entry;`;
+    const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, project.id
+    FROM entry
+    LEFT JOIN project ON entry.project_id = project.id
+    GROUP BY entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, project.id;`
+    // const queryText = `SELECT * from entry;`
     pool.query( queryText )
     .then(  ( result ) => {
         console.log( `Back from the database with ${ result }`);
@@ -26,9 +31,10 @@ router.post( '/', ( req, res ) => {
     let hours = moment.utc( moment( now,"HH:mm" ).diff( moment( then,"HH:mm" ) ) ).format( "HH:mm" );
     hours = moment.duration( hours ).asHours();
     
-    const queryProjectText = `INSERT INTO project ( name, totalhours ) VALUES ( ${ req.body.projectname }, SUM( `
-    const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours ) VALUES ( $1, $2, $3, $4, $5, $6 )`;
+    const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours, project_id ) VALUES ( $1, $2, $3, $4, $5, $6, $7 );`;
+    // UPDATE entry SET project_id = project.id FROM project WHERE entry.projectname = project.name;`;
     pool.query( queryEntryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, newEntry.starttime, newEntry.endtime, hours ] )
+    // pool.query( queryIdText )
     .then( ( result ) => {
         console.log( `Successfully posted to database with ${ result }` );
         res.sendStatus( 201 );

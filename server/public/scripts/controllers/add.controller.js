@@ -10,7 +10,8 @@ timeApp.controller( 'AddController', function ( TimeService ) {
             dateof: self.dateof,
             starttime: self.starttime,
             endtime: self.endtime,
-            entryhours: self.entryhours
+            entryhours: self.entryhours,
+            project_id: self.project_id
         }
         TimeService.newEntry = self.newEntry;
         TimeService.addEntry().then( function( response ) {
@@ -23,7 +24,7 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         TimeService.getEntry().then( function( response ){
             self.entries = TimeService.entryArray.list; 
         });
-    } // end getPowers
+    } // end getEntry
 
     self.getEntry();
 })

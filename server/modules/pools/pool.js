@@ -5,7 +5,8 @@ const config = {
     host: 'localhost',
     port: '5432',
     max: 10,
-    idleTimeoutMillis: 1000
+    idleTimeoutMillis: 1000,
+    multipleStatements: true
 };
 
 module.exports = new pg.Pool( config );
