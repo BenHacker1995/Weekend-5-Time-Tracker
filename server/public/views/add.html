@@ -22,7 +22,7 @@
         <td>{{ entry.projectname }}</td>
         <td>{{ entry.dateof.substring( 0, 10 ) }}</td>
         <td>{{ entry.entryhours }}</td>
-        <td><input type="button" value="Delete"></td>
+        <td><input type="button" value="Delete" ng-click="AC.deleteEntry( entry.id )"></td>
     </tr>
 </table>
 </ul>

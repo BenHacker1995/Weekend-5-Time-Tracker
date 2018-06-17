@@ -6,11 +6,11 @@ const moment = require( 'moment' );
 router.get( '/', ( req, res ) => {
     console.log( 'In GET request for entry' );
     // const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname FROM entry;`;
-    const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, project.id
-    FROM entry
-    LEFT JOIN project ON entry.project_id = project.id
-    GROUP BY entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, project.id;`
-    // const queryText = `SELECT * from entry;`
+    // const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, entry.id, project.id
+    // FROM entry
+    // LEFT JOIN project ON entry.project_id = project.id
+    // GROUP BY entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, entry.id, project.id;`
+    const queryText = `SELECT * from entry;`
     pool.query( queryText )
     .then(  ( result ) => {
         console.log( `Back from the database with ${ result }`);
@@ -53,6 +53,20 @@ router.put( '/', ( req, res ) => {
         res.sendStatus( 200 );
     }).catch( ( error ) => {
         console.log( `Error updating database: ${ error }` );
+        res.sendStatus( 500 );
+    })
+})
+
+router.delete( '/:id', ( req, res ) => {
+    console.log( 'In DELETE request for entry' );
+    const queryText = `DELETE FROM entry WHERE id = $1;`;
+    
+    pool.query( queryText, [ req.params.id ] )
+    .then( ( result ) => {
+        console.log( `Successfully deleted entry` );
+        res.sendStatus( 200 );
+    }).catch( ( error ) => {
+        console.log( `Error deleting from database: ${ error }` );
         res.sendStatus( 500 );
     })
 })
