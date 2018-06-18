@@ -1,5 +1,5 @@
-timeApp.controller( 'AddController', function ( TimeService ) {
-    console.log( 'AddController has been loaded' );
+timeApp.controller( 'TimeController', function ( TimeService ) {
+    console.log( 'TimeController has been loaded' );
     const self = this;
 
     self.addEntry = function() {
@@ -19,11 +19,21 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         })
     }
 
+    self.clearEntryInput = function() {
+        console.log( 'In clearEntryInput of controller' );
+        self.entrytext = '';
+        self.projectname = '';
+        self.dateof = '';
+        self.starttime = '';
+        self.endtime = '';
+    }
+
     self.getEntry = function() {
         console.log( 'In getEntry of controller' );
         TimeService.getEntry().then( function( response ){
-            self.entries = TimeService.entryArray.list; 
-        });
+            self.entries = TimeService.entryArray.list;
+            self.clearEntryInput(); 
+        })
     } // end getEntry
 
     self.deleteEntry = function( deleteId ) {
@@ -51,6 +61,11 @@ timeApp.controller( 'AddController', function ( TimeService ) {
         })
     }
 
+    self.clearProjectInput = function() {
+        console.log( 'In clearEntryInput of controller' );
+        self.name = '';
+    }
+
     self.deleteProject = function( deleteId ) {
         console.log( 'In deleteProject of controller' );
         TimeService.deleteProject( deleteId ).then( function( response ) {
@@ -61,7 +76,8 @@ timeApp.controller( 'AddController', function ( TimeService ) {
     self.getProject = function() {
         console.log( 'In getProject of controller' );
         TimeService.getProject().then( function( response ){
-            self.projects = TimeService.projectArray.list; 
+            self.projects = TimeService.projectArray.list;
+            self.clearProjectInput();
         });
     } // end getProject
 

@@ -1,35 +1,35 @@
-<form ng-submit="AC.addEntry()">
+<form ng-submit="TC.addEntry()">
     <md-card layout-align="center center">
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">Add Entry</span>
+                <span layout-align="center center" class="md-title text-center">Add Entry<span>
             </md-card-title-text>
         </md-card-title>
         <md-input-container>
             <label>What did you do?</label>
-            <input ng-model="AC.entrytext">
+            <input ng-model="TC.entrytext">
         </md-input-container>
         <div layout="row">
             <md-input-container class="md-block">
-                <md-datepicker ng-model="AC.dateof" md-placeholder="Enter date"></md-datepicker>
+                <md-datepicker ng-model="TC.dateof" md-placeholder="Enter date"></md-datepicker>
             </md-input-container>
             <md-input-container class="md-block">
-                <input type="time" ng-model="AC.starttime" placeholder="Start time">
+                <input type="time" ng-model="TC.starttime" placeholder="Start time">
             </md-input-container>
             <md-input-container class="md-block">
-                    <input type="time" ng-model="AC.endtime" placeholder="End time">
+                    <input type="time" ng-model="TC.endtime" placeholder="End time">
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Project</label>
-                <md-select ng-model="AC.projectname">
+                <md-select ng-model="TC.projectname">
                     <md-option><em>None</em></md-option>
-                    <md-option ng-repeat="project in AC.projects" ng-value="project.name" ng-disabled="$index === 1">
+                    <md-option ng-repeat="project in TC.projects" ng-value="project.name" ng-disabled="$index === 1">
                         {{ project.name }}
                     </md-option>
                 </md-select>
             </md-input-container>
             <md-input-container class="md-block">
-                <md-button class="md-raised" ng-click="AC.addEntry()">Submit</md-button>
+                <md-button class="md-raised" ng-click="TC.addEntry()">Submit</md-button>
             </md-input-container>
         </div>
       </md-card-content>
@@ -44,12 +44,12 @@
             <th>Hours</th>
             <th>Actions</th>
         </thead>
-        <tr ng-repeat="entry in AC.entries">
+        <tr ng-repeat="entry in TC.entries">
             <td>{{ entry.entrytext }}</td>
             <td>{{ entry.projectname }}</td>
             <td>{{ entry.dateof.substring( 0, 10 ) }}</td>
             <td>{{ entry.entryhours }}</td>
-            <td><input type="button" value="Delete" ng-click="AC.deleteEntry( entry.id )"></td>
+            <td><input type="button" value="Delete" ng-click="TC.deleteEntry( entry.id )"></td>
         </tr>
     </table>
 </md-card>

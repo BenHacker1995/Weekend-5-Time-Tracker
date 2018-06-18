@@ -5,11 +5,6 @@ const moment = require( 'moment' );
 
 router.get( '/', ( req, res ) => {
     console.log( 'In GET request for entry' );
-    // const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname FROM entry;`;
-    // const queryText = `SELECT entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, entry.id, project.id
-    // FROM entry
-    // LEFT JOIN project ON entry.project_id = project.id
-    // GROUP BY entry.entrytext, entry.entryhours, entry.dateof, entry.projectname, entry.project_id, entry.id, project.id;`
     const queryText = `SELECT * from entry;`
     pool.query( queryText )
     .then(  ( result ) => {
@@ -35,9 +30,7 @@ router.post( '/', ( req, res ) => {
     hours = moment.duration( hours ).asHours();
     
     const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours ) VALUES ( $1, $2, $3, $4, $5, $6 );`;
-    // UPDATE entry SET project_id = project.id FROM project WHERE entry.projectname = project.name;`;
     pool.query( queryEntryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, then, now, hours ] )
-    // pool.query( queryIdText )
     .then( ( result ) => {
         console.log( `Successfully posted to database with ${ result }` );
         res.sendStatus( 201 );

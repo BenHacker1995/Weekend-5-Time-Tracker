@@ -1,4 +1,4 @@
-<form ng-submit="AC.addProject()">
+<form ng-submit="TC.addProject()">
     <md-card layout-align="center center">
         <md-card-title>
             <md-card-title-text>
@@ -7,10 +7,10 @@
         </md-card-title>
         <md-input-container>
         <label>Project</label>
-            <input ng-model="AC.name">
+            <input ng-model="TC.name">
         </md-input-container>
         <md-input-container class="md-block">
-            <md-button class="md-raised" ng-click="AC.addEntry()">Submit</md-button>
+            <md-button class="md-raised" ng-click="TC.addEntry()">Submit</md-button>
         </md-input-container>
     </md-card>
     <md-card>
@@ -20,10 +20,10 @@
                 <th>Total Hours</th>
                 <th>Actions</th>
             </thead>
-            <tr ng-repeat="project in AC.projects">
+            <tr ng-repeat="project in TC.projects">
                 <td>{{ project.name }}</td>
                 <td>{{ project.sum || 0 }}</td>
-                <td><input type="button" value="Delete" ng-click="AC.deleteProject( project.id )"></td>
+                <td><input type="button" value="Delete" ng-click="TC.deleteProject( project.id )"></td>
             </tr>
         </table>
     </md-card>
