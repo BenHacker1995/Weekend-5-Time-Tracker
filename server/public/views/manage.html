@@ -1,19 +1,30 @@
-<h3>Manage Projects</h3>
 <form ng-submit="AC.addProject()">
-    <div>
-        <input type="text" placeholder="Add Project" ng-model="AC.name">
-        <input type="submit" value="Submit" ng-click="AC.addProject">
-    </div>
+    <md-card layout-align="center center">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Manage Projects</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-input-container>
+        <label>Project</label>
+            <input ng-model="AC.name">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button class="md-raised" ng-click="AC.addEntry()">Submit</md-button>
+        </md-input-container>
+    </md-card>
+    <md-card>
+        <table class="ng-table">
+            <thead>
+                <th>Project</th>
+                <th>Total Hours</th>
+                <th>Actions</th>
+            </thead>
+            <tr ng-repeat="project in AC.projects">
+                <td>{{ project.name }}</td>
+                <td>{{ project.sum || 0 }}</td>
+                <td><input type="button" value="Delete" ng-click="AC.deleteProject( project.id )"></td>
+            </tr>
+        </table>
+    </md-card>
 </form>
-<table class="table">
-    <thead>
-        <th>Project</th>
-        <th>Total Hours</th>
-        <th>Actions</th>
-    </thead>
-    <tr ng-repeat="project in AC.projects">
-        <td>{{ project.name }}</td>
-        <td>{{ project.sum || '0' }}</td>
-        <td><input type="button" value="Delete" ng-click="AC.deleteProject( project.id )"></td>
-    </tr>
-</table>
