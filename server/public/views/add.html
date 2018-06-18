@@ -23,7 +23,7 @@
                 <label>Project</label>
                 <md-select ng-model="TC.projectname">
                     <md-option><em>None</em></md-option>
-                    <md-option ng-repeat="project in TC.projects" ng-value="project.name" ng-disabled="$index === 1">
+                    <md-option ng-repeat="project in TC.projects" ng-value="project.name">
                         {{ project.name }}
                     </md-option>
                 </md-select>
