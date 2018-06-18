@@ -1,4 +1,4 @@
-const timeApp = angular.module( 'timeApp', [ 'ngRoute', 'ngMaterial' ] );
+const timeApp = angular.module( 'timeApp', [ 'ngRoute', 'ngMaterial', 'ngMessages' ] );
 
 timeApp.config( function ( $routeProvider ) {
     console.log( 'Route config loaded' );
@@ -12,7 +12,7 @@ timeApp.config( function ( $routeProvider ) {
         })
         .when( '/manage', {
             templateUrl: '/views/manage.html',
-            controller: 'ManageController as MC'
+            controller: 'AddController as AC'
         })
         .otherwise( { template: '<h1>404</h1>' });
 });

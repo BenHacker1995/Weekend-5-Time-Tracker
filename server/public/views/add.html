@@ -1,28 +1,55 @@
-<h3>Add Entry</h3>
 <form ng-submit="AC.addEntry()">
-    <input type="text" placeholder="Share what you did here!" ng-model="AC.entrytext">
-    <div>
-        <input type="text" placeholder="Project" ng-model="AC.projectname">
-        <input type="text" placeholder="yyyy/mm/dd" ng-model="AC.dateof">
-        <input type="text" placeholder="Start Time" ng-model="AC.starttime">
-        <input type="text" placeholder="End Time" ng-model="AC.endtime">
-        <input type="submit" value="Submit">
-    </div>
+    <md-card layout-align="center center">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Add Entry</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-input-container>
+            <label>What did you do?</label>
+            <input ng-model="AC.entrytext">
+        </md-input-container>
+        <div layout="row">
+            <md-input-container class="md-block">
+                <md-datepicker ng-model="AC.dateof" md-placeholder="Enter date"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="time" ng-model="AC.starttime" placeholder="Start time">
+            </md-input-container>
+            <md-input-container class="md-block">
+                    <input type="time" ng-model="AC.endtime" placeholder="End time">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Project</label>
+                <md-select ng-model="AC.projectname">
+                    <md-option><em>None</em></md-option>
+                    <md-option ng-repeat="project in AC.projects" ng-value="project.name" ng-disabled="$index === 1">
+                        {{ project.name }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <md-button class="md-raised" ng-click="AC.addEntry()">Submit</md-button>
+            </md-input-container>
+        </div>
+      </md-card-content>
+    </md-card>
 </form>
-<table class="table">
-    <thead>
-        <th>Entry</th>
-        <th>Project</th>
-        <th>Date</th>
-        <th>Hours</th>
-        <th>Actions</th>
-    </thead>
-    <tr ng-repeat="entry in AC.entries">
-        <td>{{ entry.entrytext }}</td>
-        <td>{{ entry.projectname }}</td>
-        <td>{{ entry.dateof.substring( 0, 10 ) }}</td>
-        <td>{{ entry.entryhours }}</td>
-        <td><input type="button" value="Delete" ng-click="AC.deleteEntry( entry.id )"></td>
-    </tr>
-</table>
-</ul>
+<md-card>
+    <table class="ng-table">
+        <thead>
+            <th>Entry</th>
+            <th>Project</th>
+            <th>Date</th>
+            <th>Hours</th>
+            <th>Actions</th>
+        </thead>
+        <tr ng-repeat="entry in AC.entries">
+            <td>{{ entry.entrytext }}</td>
+            <td>{{ entry.projectname }}</td>
+            <td>{{ entry.dateof.substring( 0, 10 ) }}</td>
+            <td>{{ entry.entryhours }}</td>
+            <td><input type="button" value="Delete" ng-click="AC.deleteEntry( entry.id )"></td>
+        </tr>
+    </table>
+</md-card>

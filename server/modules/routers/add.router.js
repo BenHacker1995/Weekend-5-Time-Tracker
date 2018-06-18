@@ -27,13 +27,16 @@ router.post( '/', ( req, res ) => {
     
     let now  = req.body.endtime;
     let then = req.body.starttime;
+    now = moment( now ).format( "HH:mm" );
+    then = moment( then ).format( "HH:mm" );
+
 
     let hours = moment.utc( moment( now,"HH:mm" ).diff( moment( then,"HH:mm" ) ) ).format( "HH:mm" );
     hours = moment.duration( hours ).asHours();
     
     const queryEntryText = `INSERT INTO entry ( entrytext, projectname, dateof, starttime, endtime, entryhours ) VALUES ( $1, $2, $3, $4, $5, $6 );`;
     // UPDATE entry SET project_id = project.id FROM project WHERE entry.projectname = project.name;`;
-    pool.query( queryEntryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, newEntry.starttime, newEntry.endtime, hours ] )
+    pool.query( queryEntryText, [ newEntry.entrytext, newEntry.projectname, newEntry.dateof, then, now, hours ] )
     // pool.query( queryIdText )
     .then( ( result ) => {
         console.log( `Successfully posted to database with ${ result }` );
